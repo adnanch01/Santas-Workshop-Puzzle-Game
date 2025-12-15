@@ -1,5 +1,10 @@
 name: Deploy to GitHub Pages
 
+# IMPORTANT: Before this workflow can run, you must enable GitHub Pages in your repository settings:
+# 1. Go to Settings > Pages
+# 2. Under "Source", select "GitHub Actions"
+# 3. Save the settings
+
 on:
   push:
     branches:
