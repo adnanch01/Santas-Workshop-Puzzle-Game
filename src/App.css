@@ -1,0 +1,156 @@
+/* src/App.css - Consolidated Styles for the Game */
+
+/* --- Global Variables (Should also be in index.css if separate) --- */
+:root {
+    --bg-dark: #1e1e1e;
+    --tile-color: #c93c3c; /* Red/Maroon Festive Color */
+    --accent-color: #4CAF50; /* Green Accent */
+    --text-light: #f0f0f0;
+    --font-family: Arial, sans-serif;
+}
+
+/* --- Base Styles --- */
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    font-family: var(--font-family);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    margin: 0;
+    min-height: 100vh;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h1 {
+    color: var(--accent-color);
+    font-size: 2.5em;
+}
+
+/* --- Game Container and Stats --- */
+.game-container {
+    background: #333;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    width: 90%;
+    max-width: 500px; /* Overall container size */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stats-bar {
+    width: 100%;
+    max-width: 400px; /* CRITICAL: Align with puzzle-grid size */
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+/* --- Tile Styling (Used by Tile.jsx) --- */
+.tile {
+    /* CRITICAL: Ensure the tiles are square and centered */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1 / 1; 
+
+    background-color: var(--tile-color);
+    color: var(--text-light);
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 4px #993333; /* 3D effect */
+    user-select: none;
+    font-size: 1.5em;
+    transition: background-color 0.1s, transform 0.1s;
+}
+
+.tile:hover {
+    background-color: #e55c5c;
+}
+
+.tile:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px #993333;
+}
+
+.empty {
+    background-color: var(--bg-dark);
+    cursor: default;
+    box-shadow: none;
+}
+.empty:hover {
+    background-color: var(--bg-dark);
+}
+
+/* --- Controls (Buttons) --- */
+.controls {
+    display: flex;
+    justify-content: space-around;
+    gap: 15px;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 400px; /* CRITICAL: Align with puzzle-grid size */
+}
+
+.controls button {
+    padding: 10px 15px;
+    font-size: 1em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    background-color: var(--tile-color); 
+    color: var(--text-light);
+    flex-grow: 1;
+}
+
+.magic-button {
+    background-color: var(--accent-color) !important; 
+}
+
+.magic-button:hover {
+    background-color: #66BB6A !important;
+}
+
+/* Status Messages */
+#status-message {
+    text-align: center;
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #2e7d32; 
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+/* --- Hint System Styling (Strategic Assistance Features) --- */
+
+.hint-glow {
+    /* CRITICAL: Use !important to ensure override */
+    background-color: #ffd700 !important; /* Gold */
+    color: #1e1e1e !important; /* Dark text for contrast */
+    
+    /* Animation for the visual effect */
+    animation: pulse 1s infinite alternate;
+    box-shadow: 0 0 15px #ffd700;
+    z-index: 10;
+}
+
+@keyframes pulse {
+    from {
+        box-shadow: 0 0 10px #ffd700;
+        transform: scale(1.0);
+    }
+    to {
+        box-shadow: 0 0 25px #ffd700;
+        transform: scale(1.05);
+    }
+}
