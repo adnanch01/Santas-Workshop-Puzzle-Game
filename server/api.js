@@ -7,6 +7,7 @@ const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const { v4: uuidv4 } = require('uuid');
 const fs = require('fs').promises;
+const fsSync = require('fs');
 const path = require('path');
 
 const app = express();
@@ -26,12 +27,53 @@ function connectDB() {
         db = new Database(dbPath);
         // Enable foreign keys
         db.pragma('foreign_keys = ON');
+        // Ensure schema exists (auto-initialize on first run)
+        initializeDatabaseIfNeeded(db);
         // Test connection
         db.prepare('SELECT 1').get();
         console.log("Database connected successfully.");
     } catch (err) {
         console.error("Database connection failed:", err.message);
         process.exit(1); 
+    }
+}
+
+// Initialize database schema and seed data if tables are missing
+function initializeDatabaseIfNeeded(dbInstance) {
+    try {
+        const tableCheck = dbInstance.prepare(
+            "SELECT name FROM sqlite_master WHERE type='table' AND name='Users'"
+        ).get();
+
+        if (tableCheck) {
+            // Schema already initialized
+            return;
+        }
+
+        console.log('No Users table found. Initializing database schema...');
+
+        const sqlFiles = [
+            path.join(__dirname, 'schema.sql'),
+            path.join(__dirname, 'seed.sql'),
+            path.join(__dirname, 'schema_migrations.sql'),
+            path.join(__dirname, 'seed_additional_features.sql')
+        ];
+
+        for (const filePath of sqlFiles) {
+            if (!fsSync.existsSync(filePath)) {
+                console.error(`SQL file not found during init: ${filePath}`);
+                continue;
+            }
+
+            const sql = fsSync.readFileSync(filePath, 'utf8');
+            dbInstance.exec(sql);
+            console.log(`Executed ${path.basename(filePath)} successfully.`);
+        }
+
+        console.log('Database schema initialization complete.');
+    } catch (err) {
+        console.error('Database initialization error:', err);
+        // Let the app continue so we can see clear error responses
     }
 }
 
