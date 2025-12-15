@@ -1,11 +1,11 @@
 // src/components/Tile.jsx
 
-import React from 'react';
+import React, { useState } from 'react';
 import '../App.css'; 
 
-// Added new prop: isHint
 const Tile = ({ value, index, size, onTileClick, isHint }) => { 
     const isEmpty = value === null;
+    const [isPressed, setIsPressed] = useState(false);
 
     const handleClick = () => {
         if (!isEmpty) {
@@ -13,13 +13,30 @@ const Tile = ({ value, index, size, onTileClick, isHint }) => {
         }
     };
 
+    const handleMouseDown = () => {
+        if (!isEmpty) {
+            setIsPressed(true);
+        }
+    };
+
+    const handleMouseUp = () => {
+        setIsPressed(false);
+    };
+
+    const handleMouseLeave = () => {
+        setIsPressed(false);
+    };
+
     return (
         <div
-            // CRITICAL FIX: Only apply the hint-glow class IF the tile is NOT empty.
-            className={`tile ${isEmpty ? 'empty' : ''} ${!isEmpty && isHint ? 'hint-glow' : ''}`} 
+            className={`tile ${isEmpty ? 'empty' : ''} ${!isEmpty && isHint ? 'hint-glow' : ''} ${isPressed ? 'pressed' : ''}`} 
             onClick={handleClick}
+            onMouseDown={handleMouseDown}
+            onMouseUp={handleMouseUp}
+            onMouseLeave={handleMouseLeave}
             style={{ 
-                // ... (existing styles) ...
+                transition: 'all 0.2s ease-in-out',
+                transform: isPressed ? 'scale(0.95) translateY(2px)' : 'scale(1) translateY(0)'
             }}
         >
             {value}

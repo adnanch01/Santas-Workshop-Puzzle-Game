@@ -1,0 +1,60 @@
+{
+  "chapters": [
+    {
+      "chapter_number": 1,
+      "title": "Santa's Workshop",
+      "narrative": "Welcome to Santa's Workshop! The elves need your help organizing the toy pieces. Your first task is to solve a simple puzzle to unlock the workshop door. Good luck!",
+      "unlock_requirement": {
+        "type": "none",
+        "value": 0
+      },
+      "puzzle_difficulty": 1,
+      "puzzle_size": 3
+    },
+    {
+      "chapter_number": 2,
+      "title": "Elf Training",
+      "narrative": "Great job! The workshop is open. Now the young elves need training. Complete more puzzles to help them learn the art of toy organization. Prove your skills!",
+      "unlock_requirement": {
+        "type": "puzzle_count",
+        "value": 5
+      },
+      "puzzle_difficulty": 2,
+      "puzzle_size": 4
+    },
+    {
+      "chapter_number": 3,
+      "title": "Toy Assembly",
+      "narrative": "The elves are learning! Now it's time for the real challenge - assembling the toys. These puzzles are getting trickier, but Santa believes in you!",
+      "unlock_requirement": {
+        "type": "puzzle_count",
+        "value": 10
+      },
+      "puzzle_difficulty": 4,
+      "puzzle_size": 4
+    },
+    {
+      "chapter_number": 4,
+      "title": "Sleigh Loading",
+      "narrative": "Excellent work! The toys are ready, but now we need to load them onto the sleigh. This requires precision and skill. Show Santa what you've learned!",
+      "unlock_requirement": {
+        "type": "skill_level",
+        "value": 3.0
+      },
+      "puzzle_difficulty": 5,
+      "puzzle_size": 6
+    },
+    {
+      "chapter_number": 5,
+      "title": "Christmas Eve Delivery",
+      "narrative": "This is it! The final challenge. Christmas Eve is here, and the sleigh must be perfectly organized for Santa's journey around the world. Can you master this ultimate puzzle?",
+      "unlock_requirement": {
+        "type": "puzzle_count",
+        "value": 25
+      },
+      "puzzle_difficulty": 8,
+      "puzzle_size": 8
+    }
+  ]
+}
+
