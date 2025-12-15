@@ -222,4 +222,11 @@ ISC
 
 Built as a full-stack web development project.
 
+## 🤖 AI Usage & Assistance
+
+This project was developed with the help of AI-assisted tools (such as GitHub Copilot / ChatGPT-style assistants and the Cursor editor).  
+- **AI was used for:** scaffolding React/Vite code, refactoring components, suggesting styling improvements, and helping with deployment configuration (GitHub Pages + Render).  
+- **The human author was responsible for:** the original idea, game design, database schema, gameplay logic, and final decisions on what code to keep, modify, or discard.  
+- **Review & responsibility:** all AI-suggested code was reviewed, tested, and integrated by the author, who takes full responsibility for the final codebase and documentation.
+
 ## 🎄 Happy Puzzling! 🎁
