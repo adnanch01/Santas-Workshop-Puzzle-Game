@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { API_BASE_URL } from '../apiConfig';
 
 const StoryMode = ({ userId, onStartChapter }) => {
     const [progress, setProgress] = useState(null);
@@ -14,7 +15,7 @@ const StoryMode = ({ userId, onStartChapter }) => {
     const fetchProgress = async () => {
         setLoading(true);
         try {
-            const response = await fetch(`http://localhost:3001/api/story/progress/${userId}`);
+            const response = await fetch(`${API_BASE_URL}/api/story/progress/${userId}`);
             if (response.ok) {
                 const data = await response.json();
                 setProgress(data);
@@ -29,7 +30,7 @@ const StoryMode = ({ userId, onStartChapter }) => {
     const handleChapterSelect = async (chapterNumber) => {
         setLoading(true);
         try {
-            const response = await fetch(`http://localhost:3001/api/story/chapter/${chapterNumber}`);
+            const response = await fetch(`${API_BASE_URL}/api/story/chapter/${chapterNumber}`);
             if (response.ok) {
                 const data = await response.json();
                 setSelectedChapter(data);

@@ -8,6 +8,7 @@ import PowerUpPanel from './PowerUpPanel';
 import VictoryAnimation from './VictoryAnimation';
 import AudioManager from './AudioManager';
 import { isSolved, findEmptyIndex, shuffleBoard } from '../logic/puzzleUtils'; 
+import { API_BASE_URL } from '../apiConfig';
 
 const GameGrid = ({ initialSize = 4, userId, onAchievementsEarned }) => {
     // --- State Variables ---
@@ -43,7 +44,7 @@ const GameGrid = ({ initialSize = 4, userId, onAchievementsEarned }) => {
     // Log analytics for puzzle start
     useEffect(() => {
         if (sessionId && userId) {
-            fetch('http://localhost:3001/api/analytics/log', {
+            fetch(`${API_BASE_URL}/api/analytics/log`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -63,7 +64,7 @@ const GameGrid = ({ initialSize = 4, userId, onAchievementsEarned }) => {
         
         try {
             // API call to get puzzle from backend
-            const response = await fetch('http://localhost:3001/api/puzzle/generate', {
+            const response = await fetch(`${API_BASE_URL}/api/puzzle/generate`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ userId })
@@ -116,7 +117,7 @@ const GameGrid = ({ initialSize = 4, userId, onAchievementsEarned }) => {
             
             // API Call to save final session data
             if (sessionId) {
-                fetch('http://localhost:3001/api/game/end', {
+                fetch(`${API_BASE_URL}/api/game/end`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ 
@@ -200,7 +201,7 @@ const GameGrid = ({ initialSize = 4, userId, onAchievementsEarned }) => {
         setIsProcessing(true);
 
         try {
-            const response = await fetch('http://localhost:3001/api/magic/hint', {
+            const response = await fetch(`${API_BASE_URL}/api/magic/hint`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ 

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { API_BASE_URL } from '../apiConfig';
 
 const PowerUpPanel = ({ userId, sessionId, boardState, size, onPowerUpApplied }) => {
     const [powerups, setPowerups] = useState([]);
@@ -14,7 +15,7 @@ const PowerUpPanel = ({ userId, sessionId, boardState, size, onPowerUpApplied })
     const fetchPowerUps = async () => {
         setLoading(true);
         try {
-            const response = await fetch(`http://localhost:3001/api/powerups/user/${userId}`);
+            const response = await fetch(`${API_BASE_URL}/api/powerups/user/${userId}`);
             if (response.ok) {
                 const data = await response.json();
                 setPowerups(data.powerups || []);
@@ -32,7 +33,7 @@ const PowerUpPanel = ({ userId, sessionId, boardState, size, onPowerUpApplied })
         setLoading(true);
 
         try {
-            const response = await fetch('http://localhost:3001/api/powerups/use', {
+            const response = await fetch(`${API_BASE_URL}/api/powerups/use`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

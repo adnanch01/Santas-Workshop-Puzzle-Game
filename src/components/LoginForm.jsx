@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { API_BASE_URL } from '../apiConfig';
 
 const LoginForm = ({ onLogin }) => {
     const [isRegistering, setIsRegistering] = useState(false);
@@ -19,7 +20,7 @@ const LoginForm = ({ onLogin }) => {
                 ? { username, email, password }
                 : { username, password };
 
-            const response = await fetch(`http://localhost:3001${endpoint}`, {
+            const response = await fetch(`${API_BASE_URL}${endpoint}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(body)
@@ -50,7 +51,7 @@ const LoginForm = ({ onLogin }) => {
         setLoading(true);
 
         try {
-            const response = await fetch('http://localhost:3001/api/users/create-guest', {
+            const response = await fetch(`${API_BASE_URL}/api/users/create-guest`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' }
             });

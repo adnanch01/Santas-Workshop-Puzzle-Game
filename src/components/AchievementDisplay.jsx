@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { API_BASE_URL } from '../apiConfig';
 
 const AchievementDisplay = ({ userId, newlyEarned, onClose }) => {
     const [achievements, setAchievements] = useState([]);
@@ -20,7 +21,7 @@ const AchievementDisplay = ({ userId, newlyEarned, onClose }) => {
     const fetchAchievements = async () => {
         setLoading(true);
         try {
-            const response = await fetch(`http://localhost:3001/api/achievements/user/${userId}`);
+            const response = await fetch(`${API_BASE_URL}/api/achievements/user/${userId}`);
             if (response.ok) {
                 const data = await response.json();
                 setAchievements(data.achievements || []);
