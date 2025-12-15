@@ -14,12 +14,8 @@ const PORT = process.env.PORT || 3001;
 
 // --- Middleware ---
 app.use(express.json());
-app.use(cors({
-    origin: [
-        'http://localhost:5173',
-        'https://adnanch01.github.io'
-    ]
-}));
+// Allow all origins for simplicity in this demo deployment
+app.use(cors());
 
 // --- Database Connection Setup ---
 let db;
